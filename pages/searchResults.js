@@ -5,7 +5,14 @@ import Image from "next/image";
 function SearchResults() {
   const router = useRouter();
   const { plantdata } = router.query;
-  const filteredPlants = JSON.parse(plantdata);
+  let filteredPlants = [];
+  try {
+    if (plantdata) {
+      filteredPlants = JSON.parse(plantdata);
+    }
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+  }
   return (
     <div className="p-9 w-full h-full items-center flex flex-col md:flex-row justify-center ">
       {filteredPlants && filteredPlants.length > 0 ? (
